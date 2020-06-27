@@ -16,6 +16,7 @@ for example in the below code, I receive a MsgId and MsgText from backend and I 
 
 **4. And always remember to give the setTimeOut a number for example 12000 milliseconds**
 
+**5. And always remember that you have to import the Alert component in every component which you want to show. not in the parent component like dashboard, because if you import it in the parent component like dashboard, if you change the page between child components inside parent (Dashboard) component, in this case the Alert component will be re-rendered and if you change the page you will see the same alert shows in that page without doing anything, so this is wrong.**
 Example:
 
 ```

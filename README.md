@@ -20,6 +20,17 @@ for example in the below code, I receive a MsgId and MsgText from backend and I 
 Example:
 
 ```
+constructor(props) {
+    super(props);
+    
+    this.state = {
+        showAlert: false,
+        alertStatus: null,
+        alertText: null,
+        dashboardAlertHeading: null
+    }
+}
+
 resetDashboardAlert() {
     this.setState({
       showAlert: false,
@@ -48,50 +59,46 @@ componentWillReceiveProps(nextProps) {
 }
 
 render() {
-    const { token } = this.props;
-    if (token) {
-      return (
-        <BrowserRouter>
-          <div className="App">
-            <DashboardAlert
-              resetDashboardAlert={this.resetDashboardAlert}
-              showAlert={this.state.showAlert}
-              alertStatus={this.state.alertStatus}
-              alertText={this.state.alertText}
-              dashboardAlertHeading={this.state.dashboardAlertHeading}
-            />
-            <React.Suspense fallback={loading()}>
-              <Switch>
-                <Route
-                  exact
-                  path="/Profile"
-                  name="Profile"
-                  render={(props) => <Profile {...props} />}
+        return (
+            <div className='animated fadeIn'>
+                <span style={{ position: 'absolute', width: '70%', top: 0, left: 'auto', right: 'auto' }}>
+                    <DashboardAlert
+                        showAlert={this.state.showAlert}
+                        alertStatus={this.state.alertStatus}
+                        alertText={this.state.alertText}
+                        dashboardAlertHeading={this.state.dashboardAlertHeading}
+                        resetDashboardAlert={this.resetDashboardAlert}
+                    />
+                </span>
+                <Form1
+                    Token={this.state.Token}
+                    cardBody={this.renderCardBody()}
+                    closeModal={this.closeModal}
+                    deleteProductCategory={this.deleteProductCategory}
+                    modal={modal}
+                    modalHeader={modalHeader}
+                    id={id}
+                    height={height}
+                    width={width}
+                    ProductCategoryID={this.state.ProductCategoryID}
+                    rowguid={this.state.rowguid}
+                    ProductCategoryCode={this.state.ProductCategoryCode}
+                    ProductCategoryName={this.state.ProductCategoryName}
+                    ProductCategoryID={this.state.ProductCategoryID}
                 />
-                <Route
-                  path="/"
-                  name="Home"
-                  render={(props) => <DefaultLayout changeDashboardAlertParams={this.changeDashboardAlertParams} {...props} />}
-                />
-              </Switch>
-            </React.Suspense>
-          </div>
-        </BrowserRouter>
-      );
-    } else return <Redirect to='/' />
-  }
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = state => {
-  if (state.auth[0]) {
     return {
-      token: state.auth[0].token,
-      addUserMsgId: state.users,
-      groupsMsgId: state.groups,
-      productCategoryMsgId: state.productCategory
+        loading: state.productCategory.loading,
+        token: state.auth[0].token,
+        productCategory: state.productCategory.productCategory,
+        productCategoryMsgId: state.productCategory
     }
-  } else return {}
 }
 
-export default connect(mapStateToProps, { userInfoGet, userProfileImage_Get })(App);
+export default connect(mapStateToProps, { getProductCategory, productCategory_Delete })(ProductCategory);
 ```

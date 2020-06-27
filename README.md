@@ -59,6 +59,7 @@ componentWillReceiveProps(nextProps) {
 }
 
 render() {
+        const { modal, modalHeader, id, height, width } = this.state;
         return (
             <div className='animated fadeIn'>
                 <span style={{ position: 'absolute', width: '70%', top: 0, left: 'auto', right: 'auto' }}>

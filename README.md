@@ -9,8 +9,12 @@ To do that always rememeber you have to use **componentWillReceiveProps** not **
 for example in the below code, I receive a MsgId and MsgText from backend and I want to show an alert when the MsgId is equal to -1.
 
 **1. As you can see I've used componentWillReceiveProps life cycle**
+
 **2. Then I have written an if statement to render Alert Message conditionally**
+
 **3. As you can see in my if statement I have noticed if the MsgId is equal to -1 then setState the variables to show the Alert**
+
+**4. And always remember to give the setTimeOut a number for example 12000 milliseconds**
 
 Example:
 
